@@ -42,6 +42,18 @@
               '0%,100%': { opacity: 0.35 },
               '50%': { opacity: 0.6 },
             },
+            drift: {
+              '0%': { transform: 'translateY(0) translateX(0) rotate(0deg)', opacity: 0 },
+              '8%': { opacity: 0.85 },
+              '92%': { opacity: 0.85 },
+              '100%': { transform: 'translateY(-115vh) translateX(30px) rotate(300deg)', opacity: 0 },
+            },
+            driftrev: {
+              '0%': { transform: 'translateY(0) translateX(0) rotate(0deg)', opacity: 0 },
+              '8%': { opacity: 0.7 },
+              '92%': { opacity: 0.7 },
+              '100%': { transform: 'translateY(-115vh) translateX(-36px) rotate(-260deg)', opacity: 0 },
+            },
             fadeDown: {
               from: { opacity: 0, transform: 'translateY(-14px)' },
               to: { opacity: 1, transform: 'translateY(0)' },
@@ -67,6 +79,8 @@
             heroIn: 'heroIn 1s cubic-bezier(.2,.8,.2,1) .25s forwards',
             bob: 'bob 2.2s ease-in-out infinite',
             tick: 'tick .35s ease',
+            drift: 'drift linear infinite',
+            driftrev: 'driftrev linear infinite',
           },
           boxShadow: {
             soft: '0 10px 30px rgba(74,63,44,0.10)',
@@ -81,6 +95,12 @@
   <style>
     body {
       font-family: 'Noto Sans Sinhala', 'Noto Serif Sinhala', serif;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(244,199,178,0.55), transparent 55%),
+        radial-gradient(circle at 100% 30%, rgba(233,197,150,0.45), transparent 55%),
+        radial-gradient(circle at 0% 85%, rgba(216,178,196,0.35), transparent 55%),
+        linear-gradient(160deg, #fbeee0 0%, #f7ecd8 35%, #f3e6d3 60%, #f9e4de 100%);
+      background-attachment: fixed;
     }
 
     .title-gradient {
@@ -90,17 +110,28 @@
       color: transparent;
     }
 
+    .petal {
+      position: fixed;
+      bottom: -40px;
+      font-size: 22px;
+      line-height: 1;
+      will-change: transform, opacity;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       * {
         animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: .01ms !important;
       }
+      .petal {
+        display: none;
+      }
     }
   </style>
 </head>
 
-<body class="relative min-h-screen bg-cream text-ink overflow-x-hidden antialiased">
+<body class="relative min-h-screen text-ink overflow-x-hidden antialiased">
 
   <div class="fixed -top-32 -left-32 w-[420px] h-[420px] rounded-full blur-[60px] opacity-55 pointer-events-none z-0"
     style="background:radial-gradient(circle, rgba(201,168,106,0.35), transparent 70%);" aria-hidden="true"></div>
@@ -112,6 +143,16 @@
     style="background:radial-gradient(circle, rgba(169,128,63,0.18), transparent 70%);" aria-hidden="true"></div>
   <div class="fixed -top-32 -left-32 w-[420px] h-[420px] rounded-full pointer-events-none z-0 animate-floaty1"
     aria-hidden="true"></div>
+
+  <!-- Floating petals -->
+  <div class="petal pointer-events-none z-0 animate-drift" style="left:6%; animation-duration:22s; animation-delay:0s;" aria-hidden="true">🌸</div>
+  <div class="petal pointer-events-none z-0 animate-driftrev" style="left:18%; font-size:16px; animation-duration:26s; animation-delay:3s;" aria-hidden="true">✿</div>
+  <div class="petal pointer-events-none z-0 animate-drift" style="left:32%; font-size:14px; animation-duration:19s; animation-delay:6s;" aria-hidden="true">❁</div>
+  <div class="petal pointer-events-none z-0 animate-driftrev" style="left:48%; animation-duration:28s; animation-delay:1.5s;" aria-hidden="true">🌸</div>
+  <div class="petal pointer-events-none z-0 animate-drift" style="left:62%; font-size:15px; animation-duration:24s; animation-delay:8s;" aria-hidden="true">✿</div>
+  <div class="petal pointer-events-none z-0 animate-driftrev" style="left:75%; font-size:18px; animation-duration:21s; animation-delay:4s;" aria-hidden="true">🌸</div>
+  <div class="petal pointer-events-none z-0 animate-drift" style="left:88%; font-size:14px; animation-duration:27s; animation-delay:10s;" aria-hidden="true">❁</div>
+  <div class="petal pointer-events-none z-0 animate-driftrev" style="left:96%; font-size:16px; animation-duration:23s; animation-delay:5s;" aria-hidden="true">✿</div>
 
   <div class="relative z-10 max-w-[640px] mx-auto px-5 pt-8 sm:pt-10 pb-16">
 
@@ -127,7 +168,7 @@
 
     <div
       class="bg-offwhite rounded-[22px] p-3.5 shadow-deep border border-gold/20 opacity-0 animate-heroIn transition-transform duration-500 hover:-translate-y-1.5 hover:shadow-deeper">
-      <img src="invitation.png" alt="සඳුනිකා සහ තිමේෂ - ආරාධනා පත්‍රය" class="w-full block rounded-xl">
+      <img src="invitation.jpg" alt="සඳුනිකා සහ තිමේෂ - ආරාධනා පත්‍රය" class="w-full block rounded-xl">
     </div>
 
     <div class="text-center mt-4 text-goldlight text-2xl animate-bob">⌄</div>
