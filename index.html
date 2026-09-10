@@ -10,343 +10,230 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;500;600;700&family=Noto+Sans+Sinhala:wght@300;400;500;600&display=swap"
     rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#faf5e9',
+            creamdeep: '#efe6cf',
+            gold: '#a9803f',
+            goldlight: '#c9a86a',
+            ink: '#4a3f2c',
+            inksoft: '#6b5d44',
+            offwhite: '#fffdf8',
+          },
+          fontFamily: {
+            serifsi: ['"Noto Serif Sinhala"', 'serif'],
+            sanssi: ['"Noto Sans Sinhala"', '"Noto Serif Sinhala"', 'serif'],
+          },
+          keyframes: {
+            floaty1: {
+              '0%,100%': { transform: 'translate(0,0)' },
+              '50%': { transform: 'translate(40px,30px)' },
+            },
+            floaty2: {
+              '0%,100%': { transform: 'translate(0,0)' },
+              '50%': { transform: 'translate(-30px,-40px)' },
+            },
+            pulseglow: {
+              '0%,100%': { opacity: 0.35 },
+              '50%': { opacity: 0.6 },
+            },
+            fadeDown: {
+              from: { opacity: 0, transform: 'translateY(-14px)' },
+              to: { opacity: 1, transform: 'translateY(0)' },
+            },
+            heroIn: {
+              from: { opacity: 0, transform: 'translateY(24px) scale(.98)' },
+              to: { opacity: 1, transform: 'translateY(0) scale(1)' },
+            },
+            bob: {
+              '0%,100%': { transform: 'translateY(0)', opacity: 0.6 },
+              '50%': { transform: 'translateY(8px)', opacity: 1 },
+            },
+            tick: {
+              '0%': { transform: 'translateY(-8px)', opacity: 0 },
+              '100%': { transform: 'translateY(0)', opacity: 1 },
+            },
+          },
+          animation: {
+            floaty1: 'floaty1 16s ease-in-out infinite',
+            floaty2: 'floaty2 18s ease-in-out infinite',
+            pulseglow: 'pulseglow 10s ease-in-out infinite',
+            fadeDown: 'fadeDown .9s ease forwards',
+            heroIn: 'heroIn 1s cubic-bezier(.2,.8,.2,1) .25s forwards',
+            bob: 'bob 2.2s ease-in-out infinite',
+            tick: 'tick .35s ease',
+          },
+          boxShadow: {
+            soft: '0 10px 30px rgba(74,63,44,0.10)',
+            deep: '0 24px 60px rgba(74,63,44,0.16)',
+            deeper: '0 32px 70px rgba(74,63,44,0.22)',
+          },
+        },
+      },
+    };
+  </script>
+
   <style>
-    :root {
-      --cream: #f7f1e3;
-      --cream-deep: #efe6cf;
-      --gold: #a9803f;
-      --gold-light: #c9a86a;
-      --ink: #4a3f2c;
-      --ink-soft: #6b5d44;
-      --white: #fffdf8;
-      --shadow: 0 20px 50px rgba(74, 63, 44, 0.18);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
-      margin: 0;
-      padding: 0;
-      background:
-        radial-gradient(circle at 15% 10%, rgba(201, 168, 106, 0.18), transparent 40%),
-        radial-gradient(circle at 85% 90%, rgba(201, 168, 106, 0.15), transparent 40%),
-        var(--cream);
-      color: var(--ink);
       font-family: 'Noto Sans Sinhala', 'Noto Serif Sinhala', serif;
-      -webkit-font-smoothing: antialiased;
     }
 
-    .wrap {
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 32px 20px 60px;
+    .title-gradient {
+      background: linear-gradient(135deg, #4a3f2c 30%, #a9803f 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
-    .top-ornament {
-      text-align: center;
-      padding-top: 28px;
-      color: var(--gold);
-      font-size: 22px;
-      letter-spacing: 6px;
-    }
-
-    header.title {
-      text-align: center;
-      margin: 6px 0 28px;
-    }
-
-    header.title p {
-      font-family: 'Noto Serif Sinhala', serif;
-      font-weight: 500;
-      color: var(--ink-soft);
-      letter-spacing: 1px;
-      font-size: 15px;
-      margin: 0;
-    }
-
-    .card {
-      background: var(--white);
-      border-radius: 18px;
-      padding: 14px;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(169, 128, 63, 0.25);
-    }
-
-    .card img {
-      width: 100%;
-      display: block;
-      border-radius: 10px;
-    }
-
-    section {
-      margin-top: 40px;
-    }
-
-    .section-title {
-      text-align: center;
-      font-family: 'Noto Serif Sinhala', serif;
-      font-weight: 600;
-      font-size: 24px;
-      color: var(--ink);
-      margin-bottom: 6px;
-      position: relative;
-    }
-
-    .section-sub {
-      text-align: center;
-      color: var(--ink-soft);
-      font-size: 15px;
-      margin: 0 0 22px;
-    }
-
-    .divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      color: var(--gold-light);
-      margin: 8px 0 22px;
-    }
-
-    .divider::before,
-    .divider::after {
-      content: "";
-      height: 1px;
-      width: 56px;
-      background: linear-gradient(90deg, transparent, var(--gold-light));
-    }
-
-    .divider::after {
-      background: linear-gradient(90deg, var(--gold-light), transparent);
-    }
-
-    .divider span {
-      font-size: 14px;
-    }
-
-    /* Countdown */
-    .countdown {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .countdown .box {
-      background: var(--white);
-      border: 1px solid rgba(169, 128, 63, 0.3);
-      border-radius: 14px;
-      padding: 16px 10px;
-      min-width: 78px;
-      text-align: center;
-      box-shadow: 0 8px 20px rgba(74, 63, 44, 0.08);
-    }
-
-    .countdown .num {
-      font-family: 'Noto Serif Sinhala', serif;
-      font-size: 30px;
-      font-weight: 700;
-      color: var(--gold);
-      line-height: 1;
-    }
-
-    .countdown .label {
-      margin-top: 6px;
-      font-size: 13px;
-      color: var(--ink-soft);
-    }
-
-    .countdown-done {
-      text-align: center;
-      font-family: 'Noto Serif Sinhala', serif;
-      font-size: 20px;
-      color: var(--gold);
-      padding: 10px 0;
-    }
-
-    /* Location */
-    .info-card {
-      background: var(--white);
-      border: 1px solid rgba(169, 128, 63, 0.25);
-      border-radius: 16px;
-      padding: 26px 22px;
-      text-align: center;
-      box-shadow: 0 8px 20px rgba(74, 63, 44, 0.08);
-    }
-
-    .info-card .venue {
-      font-family: 'Noto Serif Sinhala', serif;
-      font-size: 20px;
-      font-weight: 600;
-      margin: 0 0 6px;
-    }
-
-    .info-card .datetime {
-      color: var(--ink-soft);
-      font-size: 15px;
-      margin: 0 0 18px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 12px 26px;
-      border-radius: 999px;
-      text-decoration: none;
-      font-size: 15px;
-      font-weight: 500;
-      margin: 6px 8px;
-      transition: transform .15s ease, box-shadow .15s ease;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--gold-light), var(--gold));
-      color: var(--white);
-      box-shadow: 0 10px 24px rgba(169, 128, 63, 0.35);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--gold);
-      border: 1.5px solid var(--gold-light);
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    /* RSVP */
-    .rsvp-buttons {
-      text-align: center;
-    }
-
-    .note {
-      text-align: center;
-      font-size: 13px;
-      color: var(--ink-soft);
-      margin-top: 14px;
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 50px;
-      color: var(--ink-soft);
-      font-family: 'Noto Serif Sinhala', serif;
-      font-size: 16px;
-    }
-
-    footer .names {
-      color: var(--gold);
-      font-weight: 600;
-      font-size: 19px;
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .bottom-ornament {
-      text-align: center;
-      margin-top: 18px;
-      color: var(--gold-light);
-      font-size: 20px;
-      letter-spacing: 6px;
-    }
-
-    @media (max-width:420px) {
-      .countdown .box {
-        min-width: 68px;
-        padding: 12px 8px;
-      }
-
-      .countdown .num {
-        font-size: 24px;
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
       }
     }
   </style>
 </head>
 
-<body>
-  <div class="wrap">
+<body class="relative min-h-screen bg-cream text-ink overflow-x-hidden antialiased">
 
-    <div class="top-ornament">🦢 · ✦ · 🦢</div>
-    <header class="title">
-      <p>විවාහ ගිවිස ගැනීමේ උත්සවය</p>
-    </header>
+  <div class="fixed -top-32 -left-32 w-[420px] h-[420px] rounded-full blur-[60px] opacity-55 pointer-events-none z-0"
+    style="background:radial-gradient(circle, rgba(201,168,106,0.35), transparent 70%);" aria-hidden="true"></div>
+  <div
+    class="fixed -bottom-24 -right-24 w-[380px] h-[380px] rounded-full blur-[60px] opacity-55 pointer-events-none z-0 animate-floaty2"
+    style="background:radial-gradient(circle, rgba(201,168,106,0.3), transparent 70%);" aria-hidden="true"></div>
+  <div
+    class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[260px] h-[260px] rounded-full blur-[60px] opacity-55 pointer-events-none z-0 animate-pulseglow"
+    style="background:radial-gradient(circle, rgba(169,128,63,0.18), transparent 70%);" aria-hidden="true"></div>
+  <div class="fixed -top-32 -left-32 w-[420px] h-[420px] rounded-full pointer-events-none z-0 animate-floaty1"
+    aria-hidden="true"></div>
 
-    <div class="card">
-      <img src="invitation.jpg" alt="සඳුනිකා සහ තිමේෂ - නිශ්චිතාර්ථ ආරාධනා පත්‍රය">
+  <div class="relative z-10 max-w-[640px] mx-auto px-5 pt-8 sm:pt-10 pb-16">
+
+    <div class="text-center pt-3 text-gold text-xl tracking-[6px] opacity-0 animate-fadeDown">
+      🦢 · ✦ · 🦢
     </div>
 
-    <section id="countdown-section">
-      <div class="divider"><span>✦</span></div>
-      <h2 class="section-title">මුහුර්තයට තව...</h2>
-      <p class="section-sub">2026 බිනර මස 24 වන ගුරු දින, පූර්ව භාග 10:15</p>
-      <div class="countdown" id="countdown">
-        <div class="box">
-          <div class="num" id="cd-days">--</div>
-          <div class="label">දින</div>
+    <header class="text-center mt-2 mb-7 opacity-0 animate-fadeDown [animation-delay:.1s]">
+      <p class="font-serifsi font-medium text-inksoft tracking-wide text-[15px] sm:text-base m-0">
+        විවාහ ගිවිස ගැනීමේ උත්සවය
+      </p>
+    </header>
+
+    <div
+      class="bg-offwhite rounded-[22px] p-3.5 shadow-deep border border-gold/20 opacity-0 animate-heroIn transition-transform duration-500 hover:-translate-y-1.5 hover:shadow-deeper">
+      <img src="invitation.jpg" alt="සඳුනිකා සහ තිමේෂ - ආරාධනා පත්‍රය" class="w-full block rounded-xl">
+    </div>
+
+    <div class="text-center mt-4 text-goldlight text-2xl animate-bob">⌄</div>
+
+    <section id="countdown-section" class="reveal opacity-0 translate-y-7 transition-all duration-700 ease-out mt-14">
+      <div class="flex items-center justify-center gap-2.5 text-goldlight mb-4">
+        <span class="h-px w-14 bg-gradient-to-r from-transparent to-goldlight"></span>
+        <span class="text-sm">✦</span>
+        <span class="h-px w-14 bg-gradient-to-l from-transparent to-goldlight"></span>
+      </div>
+      <h2 class="text-center font-serifsi font-bold text-[22px] sm:text-[27px] title-gradient mb-2">මුහුර්තයට තව...</h2>
+      <p class="text-center text-inksoft text-[15px] mb-6">2026 බිනර මස 24 වන ගුරු දින, පූර්ව භාග 10:15</p>
+      <div class="flex justify-center gap-3.5 flex-wrap" id="countdown">
+        <div
+          class="bg-offwhite/70 backdrop-blur-md border border-gold/30 rounded-2xl px-3 py-4 min-w-[82px] text-center shadow-soft transition-transform hover:-translate-y-1">
+          <div class="font-serifsi text-3xl font-bold text-gold leading-none" id="cd-days">--</div>
+          <div class="mt-1.5 text-[13px] text-inksoft">දින</div>
         </div>
-        <div class="box">
-          <div class="num" id="cd-hours">--</div>
-          <div class="label">පැය</div>
+        <div
+          class="bg-offwhite/70 backdrop-blur-md border border-gold/30 rounded-2xl px-3 py-4 min-w-[82px] text-center shadow-soft transition-transform hover:-translate-y-1">
+          <div class="font-serifsi text-3xl font-bold text-gold leading-none" id="cd-hours">--</div>
+          <div class="mt-1.5 text-[13px] text-inksoft">පැය</div>
         </div>
-        <div class="box">
-          <div class="num" id="cd-mins">--</div>
-          <div class="label">මිනිත්තු</div>
+        <div
+          class="bg-offwhite/70 backdrop-blur-md border border-gold/30 rounded-2xl px-3 py-4 min-w-[82px] text-center shadow-soft transition-transform hover:-translate-y-1">
+          <div class="font-serifsi text-3xl font-bold text-gold leading-none" id="cd-mins">--</div>
+          <div class="mt-1.5 text-[13px] text-inksoft">මිනිත්තු</div>
         </div>
-        <div class="box">
-          <div class="num" id="cd-secs">--</div>
-          <div class="label">තත්පර</div>
+        <div
+          class="bg-offwhite/70 backdrop-blur-md border border-gold/30 rounded-2xl px-3 py-4 min-w-[82px] text-center shadow-soft transition-transform hover:-translate-y-1">
+          <div class="font-serifsi text-3xl font-bold text-gold leading-none" id="cd-secs">--</div>
+          <div class="mt-1.5 text-[13px] text-inksoft">තත්පර</div>
         </div>
       </div>
     </section>
 
-    <section id="location-section">
-      <div class="divider"><span>✦</span></div>
-      <h2 class="section-title">ස්ථානය</h2>
-      <div class="info-card">
-        <p class="venue">ගම්පොල නිවසේදී</p>
-        <p class="datetime">2026 සැප්තැම්බර් 24 වන ගුරු දින &nbsp;•&nbsp; පූර්ව භාග 10:15 සිට</p>
+    <section id="location-section" class="reveal opacity-0 translate-y-7 transition-all duration-700 ease-out mt-14">
+      <div class="flex items-center justify-center gap-2.5 text-goldlight mb-4">
+        <span class="h-px w-14 bg-gradient-to-r from-transparent to-goldlight"></span>
+        <span class="text-sm">✦</span>
+        <span class="h-px w-14 bg-gradient-to-l from-transparent to-goldlight"></span>
+      </div>
+      <h2 class="text-center font-serifsi font-bold text-[22px] sm:text-[27px] title-gradient mb-2">ස්ථානය</h2>
+      <div
+        class="bg-offwhite/70 backdrop-blur-md border border-gold/25 rounded-[20px] px-6 py-7 text-center shadow-soft transition-shadow hover:shadow-deep">
+        <p class="font-serifsi text-[21px] font-semibold mb-1.5">ගම්පොල නිවසේදී</p>
+        <p class="text-inksoft text-[15px] mb-5">2026 සැප්තැම්බර් 24 වන ගුරු දින &nbsp;•&nbsp; පූර්ව භාග 10:15 සිට</p>
         <!-- TODO: replace the Google Maps link below with your exact address / map link before publishing -->
-        <a class="btn btn-primary" href="https://maps.app.goo.gl/PfvGFcbiyv9R7BJL7" target="_blank"
-          rel="noopener">සිතියමෙන් බලන්න</a>
+        <a href="https://maps.app.goo.gl/PfvGFcbiyv9R7BJL7" target="_blank" rel="noopener"
+          class="inline-block px-7 py-3 rounded-full text-[15px] font-medium text-offwhite bg-gradient-to-br from-goldlight to-gold shadow-[0_10px_26px_rgba(169,128,63,0.4)] transition-transform hover:-translate-y-1 hover:scale-[1.03] hover:brightness-105">
+          සිතියමෙන් බලන්න
+        </a>
       </div>
     </section>
 
-    <section id="rsvp-section">
-      <div class="divider"><span>✦</span></div>
-      <h2 class="section-title">පැමිණීම තහවුරු කරන්න</h2>
-      <p class="section-sub">ඔබගේ පැමිණීම කරුණාකර පහත ක්‍රමයකින් තහවුරු කරන්න</p>
-      <div class="rsvp-buttons">
+    <section id="rsvp-section" class="reveal opacity-0 translate-y-7 transition-all duration-700 ease-out mt-14">
+      <div class="flex items-center justify-center gap-2.5 text-goldlight mb-4">
+        <span class="h-px w-14 bg-gradient-to-r from-transparent to-goldlight"></span>
+        <span class="text-sm">✦</span>
+        <span class="h-px w-14 bg-gradient-to-l from-transparent to-goldlight"></span>
+      </div>
+      <h2 class="text-center font-serifsi font-bold text-[22px] sm:text-[27px] title-gradient mb-2">පැමිණීම තහවුරු කරන්න
+      </h2>
+      <p class="text-center text-inksoft text-[15px] mb-6">ඔබගේ පැමිණීම කරුණාකර පහත ක්‍රමයකින් තහවුරු කරන්න</p>
+      <div class="text-center">
         <!-- TODO: replace with your real WhatsApp number (country code, no + or spaces) -->
-        <a class="btn btn-primary" href="https://wa.me/94710130081" target="_blank" rel="noopener">WhatsApp මගින්</a>
+        <a href="https://wa.me/94710130081" target="_blank" rel="noopener"
+          class="inline-block m-1.5 px-7 py-3 rounded-full text-[15px] font-medium text-offwhite bg-gradient-to-br from-goldlight to-gold shadow-[0_10px_26px_rgba(169,128,63,0.4)] transition-transform hover:-translate-y-1 hover:scale-[1.03] hover:brightness-105">
+          WhatsApp මගින්
+        </a>
         <!-- TODO: replace with your real phone number -->
-        <a class="btn btn-outline" href="tel:+94752566065">අමතන්න</a>
+        <a href="tel:+94752566065"
+          class="inline-block m-1.5 px-7 py-3 rounded-full text-[15px] font-medium text-gold border-[1.5px] border-goldlight transition-transform hover:-translate-y-1 hover:scale-[1.03]">
+          අමතන්න
+        </a>
       </div>
     </section>
 
-    <footer>
-      <span class="names">සඳුනිකා 💛 තිමේෂ</span>
+    <footer
+      class="reveal opacity-0 translate-y-7 transition-all duration-700 ease-out text-center mt-16 text-inksoft font-serifsi text-base">
+      <span class="block text-gold font-bold text-xl mb-1.5 tracking-wide">සඳුනිකා 💛 තිමේෂ</span>
       ඔබගේ පැමිණීම අප වෙත මහත් සතුටක්
     </footer>
-    <div class="bottom-ornament">✦ ❁ ✦</div>
+    <div
+      class="reveal opacity-0 translate-y-7 transition-all duration-700 ease-out text-center mt-5 text-goldlight text-xl tracking-[6px]">
+      ✦ ❁ ✦</div>
   </div>
 
   <script>
     // Engagement date/time: 24 September 2026, 10:15 AM, Asia/Colombo (UTC+05:30)
     var eventDate = new Date("2026-09-24T10:15:00+05:30").getTime();
+    var lastVals = {};
+
+    function tickAnim(el) {
+      el.classList.remove('animate-tick');
+      void el.offsetWidth; // restart animation
+      el.classList.add('animate-tick');
+    }
 
     function updateCountdown() {
       var now = new Date().getTime();
       var diff = eventDate - now;
-      var el = document.getElementById('countdown-section');
 
       if (diff <= 0) {
-        document.getElementById('countdown').outerHTML = '<div class="countdown-done">අද මුහුර්තයයි! 🎉</div>';
+        var cd = document.getElementById('countdown');
+        if (cd) cd.outerHTML = '<div class="font-serifsi text-xl font-semibold text-gold py-3.5">අද මුහුර්තයයි! 🎉</div>';
         return;
       }
 
@@ -355,14 +242,42 @@
       var mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
       var secs = Math.floor((diff % (1000 * 60)) / 1000);
 
-      document.getElementById('cd-days').textContent = days;
-      document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
-      document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
-      document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
+      var vals = { days: days, hours: String(hours).padStart(2, '0'), mins: String(mins).padStart(2, '0'), secs: String(secs).padStart(2, '0') };
+      var ids = { days: 'cd-days', hours: 'cd-hours', mins: 'cd-mins', secs: 'cd-secs' };
+
+      Object.keys(vals).forEach(function (key) {
+        var el = document.getElementById(ids[key]);
+        if (!el) return;
+        if (lastVals[key] !== vals[key]) {
+          el.textContent = vals[key];
+          tickAnim(el);
+          lastVals[key] = vals[key];
+        }
+      });
     }
 
     updateCountdown();
     setInterval(updateCountdown, 1000);
+
+    // Reveal-on-scroll
+    var revealEls = document.querySelectorAll('.reveal');
+    function showReveal(el) {
+      el.classList.remove('opacity-0', 'translate-y-7');
+      el.classList.add('opacity-100', 'translate-y-0');
+    }
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            showReveal(entry.target);
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      revealEls.forEach(function (el) { io.observe(el); });
+    } else {
+      revealEls.forEach(showReveal);
+    }
   </script>
 </body>
 
